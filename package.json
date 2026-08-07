@@ -1,0 +1,46 @@
+{
+  "name": "vera",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "payload": "payload",
+    "generate:importmap": "payload generate:importmap",
+    "generate:types": "payload generate:types",
+    "seed": "tsx src/lib/seed.ts"
+  },
+  "dependencies": {
+    "next": "16.2.12",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "payload": "3.87.0",
+    "lucide-react": "^0.469.0",
+    "framer-motion": "^11.15.0",
+    "@payloadcms/next": "3.87.0",
+    "@payloadcms/db-postgres": "3.87.0",
+    "@payloadcms/richtext-lexical": "3.87.0",
+    "@payloadcms/storage-s3": "3.87.0",
+    "sharp": "^0.33.5",
+    "graphql": "^16.9.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "@types/node": "^22.10.7",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "tailwindcss": "^3.4.17",
+    "postcss": "^8.5.1",
+    "autoprefixer": "^10.4.20",
+    "tsx": "^4.19.2",
+    "dotenv": "^16.4.7",
+    "eslint": "^9.18.0",
+    "eslint-config-next": "16.2.12"
+  },
+  "engines": {
+    "node": ">=18.20.0"
+  }
+}
