@@ -5,6 +5,11 @@ import { BookOpen } from "@/lib/icons";
 import { SearchBar } from "@/components/SearchBar";
 import { TiltLink } from "@/components/motion/TiltLink";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+
+// Without this, Next.js treats this page as fully static since it
+// never checks who's logged in — meaning it would freeze at build time
+// and never show new content added in /admin. This makes it refresh
+// itself at most every 30 seconds instead.
 export const revalidate = 30;
 
 export default async function StoriesPage() {
@@ -29,7 +34,7 @@ export default async function StoriesPage() {
             <p className="font-display font-bold mb-3">{theme.title}</p>
             <div className="flex gap-3 overflow-x-auto pb-1 lg:grid lg:grid-cols-5 lg:overflow-visible">
               {booksByTheme[i].docs.map((book: any, j: number) => (
-                <ScrollReveal key={book.id} delay={j * 0.05} className="min-w-[140px] lg:min-w-0 shrink-0">
+                <ScrollReveal key={book.id} delay={j * 0.05} variant="tiltIn" className="min-w-[140px] lg:min-w-0 shrink-0">
                   <TiltLink href={`/stories/${book.slug}`} className="bg-white rounded-card shadow-card p-3 transition-shadow duration-300 hover:shadow-lift">
                     <div className="w-full h-32 bg-pastel-peach rounded-xl mb-2 flex items-center justify-center">
                       <BookOpen size={22} className="text-ink/30" />

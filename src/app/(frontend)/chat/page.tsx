@@ -5,6 +5,11 @@ import { PageContainer } from "@/components/PageContainer";
 import { ChatThemeIcon, Lock } from "@/lib/icons";
 import { SearchBar } from "@/components/SearchBar";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+
+// Without this, Next.js treats this page as fully static since it
+// never checks who's logged in — meaning it would freeze at build time
+// and never show new content added in /admin. This makes it refresh
+// itself at most every 30 seconds instead.
 export const revalidate = 30;
 
 const THEME_COLOR_CLASSES: Record<string, string> = {
@@ -36,7 +41,7 @@ export default async function ChatLibraryPage() {
         <p className="font-semibold text-sm mb-2">Choose a theme</p>
         <div className="grid grid-cols-3 lg:grid-cols-6 gap-2 mb-8">
           {themes.docs.map((t: any, i: number) => (
-            <ScrollReveal key={t.id} delay={i * 0.04}>
+            <ScrollReveal key={t.id} delay={i * 0.04} variant="depth">
               <a href={`#theme-${t.slug}`} className={`group rounded-card p-3 text-center block transition-all duration-300 ease-smooth hover:-translate-y-1 hover:shadow-hover ${THEME_COLOR_CLASSES[t.color] ?? "bg-pastel-peach"}`}>
                 <div className="w-8 h-8 mx-auto rounded-lg bg-white/70 flex items-center justify-center transition-transform duration-300 ease-smooth group-hover:scale-110">
                   <ChatThemeIcon iconKey={t.icon} className="w-4 h-4 text-ink" />
