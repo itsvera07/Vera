@@ -27,7 +27,7 @@ export function MobileNavDrawer({ open, onClose }: { open: boolean; onClose: () 
           // Inline style instead of a Tailwind opacity-color utility — this
           // is guaranteed to render regardless of how the custom color
           // tokens get compiled, which is what was going wrong before.
-          style={{ backgroundColor: "rgba(26, 26, 46, 0.45)" }}
+          style={{ backgroundColor: "#FBF7EF" }}
           className="fixed inset-0 z-[60] lg:hidden"
         />,
         <motion.div
