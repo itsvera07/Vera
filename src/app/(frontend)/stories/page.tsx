@@ -39,7 +39,7 @@ export default async function StoriesPage() {
                     <div className="w-full h-32 bg-pastel-peach rounded-xl mb-2 overflow-hidden flex items-center justify-center">
                       {book.cover && typeof book.cover === "object" && book.cover.url ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={book.cover.url} alt={book.cover.alt || book.title} className="w-full h-full object-cover" />
+                        <img src={book.cover.url} alt={book.cover.alt || book.title} className="w-full h-full object-contain" />
                       ) : (
                         <BookOpen size={22} className="text-ink/30" />
                       )}

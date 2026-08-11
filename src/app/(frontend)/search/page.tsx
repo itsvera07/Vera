@@ -113,7 +113,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
                     <div className="w-full h-24 bg-pastel-peach rounded-xl mb-2 overflow-hidden flex items-center justify-center">
                       {book.cover && typeof book.cover === "object" && book.cover.url ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={book.cover.url} alt={book.cover.alt || book.title} className="w-full h-full object-cover" />
+                        <img src={book.cover.url} alt={book.cover.alt || book.title} className="w-full h-full object-contain" />
                       ) : (
                         <BookOpen size={18} className="text-ink/30" />
                       )}

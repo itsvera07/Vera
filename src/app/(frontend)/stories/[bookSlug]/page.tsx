@@ -42,7 +42,7 @@ export default async function BookPage({ params }: { params: Promise<{ bookSlug:
           <div className="w-full h-40 lg:w-56 lg:h-56 lg:shrink-0 bg-pastel-peach rounded-card mb-4 overflow-hidden flex items-center justify-center animate-fade-in-up">
             {book.cover && typeof book.cover === "object" && book.cover.url ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={book.cover.url} alt={book.cover.alt || book.title} className="w-full h-full object-cover" />
+              <img src={book.cover.url} alt={book.cover.alt || book.title} className="w-full h-full object-contain" />
             ) : (
               <BookOpen size={32} className="text-ink/30" />
             )}
