@@ -17,30 +17,8 @@ export function MobileNavDrawer({ open, onClose }: { open: boolean; onClose: () 
   return (
     <AnimatePresence>
       {open && [
-        <motion.div
-          key="backdrop"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          onClick={onClose}
-          // Inline style instead of a Tailwind opacity-color utility — this
-          // is guaranteed to render regardless of how the custom color
-          // tokens get compiled, which is what was going wrong before.
-          style={{ backgroundColor: "#FBF7EF" }}
-          className="fixed inset-0 z-[60] lg:hidden"
-        />,
-        <motion.div
-          key="drawer"
-          initial={{ x: "-100%" }}
-          animate={{ x: 0 }}
-          exit={{ x: "-100%" }}
-          transition={{ type: "spring", stiffness: 320, damping: 34 }}
-          // Same here — a solid, guaranteed-opaque background rather than a
-          // Tailwind color utility that turned out to render transparent.
-          style={{ backgroundColor: "#FBF7EF" }}
-          className="fixed top-0 left-0 bottom-0 w-[78%] max-w-[300px] z-[70] lg:hidden px-5 py-6 shadow-lift flex flex-col"
-        >
+        <motion.div key="backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} onClick={onClose} style={{ backgroundColor: "rgba(26, 26, 46, 0.45)" }} className="fixed inset-0 z-[60] lg:hidden" />,
+        <motion.div key="drawer" initial={{ x: "-100%" }} animate={{ x: 0 }} exit={{ x: "-100%" }} transition={{ type: "spring", stiffness: 320, damping: 34 }} style={{ backgroundColor: "#FBF7EF" }} className="fixed top-0 left-0 bottom-0 w-[78%] max-w-[300px] z-[70] lg:hidden px-5 py-6 shadow-lift flex flex-col">
           <div className="flex items-center justify-between mb-8">
             <Logo className="text-2xl" />
             <button aria-label="Close menu" onClick={onClose} className="w-9 h-9 flex items-center justify-center rounded-full bg-white shadow-card">
