@@ -6,6 +6,11 @@ import { TiltLink } from "@/components/motion/TiltLink";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { getPayloadClient } from "@/lib/payload";
 import { BookOpen, MessageCircle, ChevronRight } from "@/lib/icons";
+
+// Without this, Next.js treats this page as fully static since it
+// never checks who's logged in — meaning it would freeze at build time
+// and never show new content added in /admin. This makes it refresh
+// itself at most every 30 seconds instead.
 export const revalidate = 30;
 
 export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
@@ -105,8 +110,13 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
               {books.map((book: any, i: number) => (
                 <ScrollReveal key={book.id} delay={i * 0.04}>
                   <TiltLink href={`/stories/${book.slug}`} className="bg-white rounded-card shadow-card p-3 transition-shadow duration-300 hover:shadow-hover">
-                    <div className="w-full h-24 bg-pastel-peach rounded-xl mb-2 flex items-center justify-center">
-                      <BookOpen size={18} className="text-ink/30" />
+                    <div className="w-full h-24 bg-pastel-peach rounded-xl mb-2 overflow-hidden flex items-center justify-center">
+                      {book.cover && typeof book.cover === "object" && book.cover.url ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={book.cover.url} alt={book.cover.alt || book.title} className="w-full h-full object-cover" />
+                      ) : (
+                        <BookOpen size={18} className="text-ink/30" />
+                      )}
                     </div>
                     <p className="text-sm font-semibold leading-snug">{book.title}</p>
                   </TiltLink>

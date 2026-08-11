@@ -36,8 +36,13 @@ export default async function StoriesPage() {
               {booksByTheme[i].docs.map((book: any, j: number) => (
                 <ScrollReveal key={book.id} delay={j * 0.05} variant="tiltIn" className="min-w-[140px] lg:min-w-0 shrink-0">
                   <TiltLink href={`/stories/${book.slug}`} className="bg-white rounded-card shadow-card p-3 transition-shadow duration-300 hover:shadow-lift">
-                    <div className="w-full h-32 bg-pastel-peach rounded-xl mb-2 flex items-center justify-center">
-                      <BookOpen size={22} className="text-ink/30" />
+                    <div className="w-full h-32 bg-pastel-peach rounded-xl mb-2 overflow-hidden flex items-center justify-center">
+                      {book.cover && typeof book.cover === "object" && book.cover.url ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={book.cover.url} alt={book.cover.alt || book.title} className="w-full h-full object-cover" />
+                      ) : (
+                        <BookOpen size={22} className="text-ink/30" />
+                      )}
                     </div>
                     <p className="text-sm font-semibold leading-snug">{book.title}</p>
                     <p className="text-xs text-ink-muted mt-1">{book.releaseSchedule === "weekly" ? "New chapter weekly" : "All chapters available"}</p>

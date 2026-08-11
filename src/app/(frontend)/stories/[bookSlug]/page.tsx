@@ -39,8 +39,13 @@ export default async function BookPage({ params }: { params: Promise<{ bookSlug:
 
       <PageContainer>
         <div className="lg:flex lg:gap-8">
-          <div className="w-full h-40 lg:w-56 lg:h-56 lg:shrink-0 bg-pastel-peach rounded-card mb-4 flex items-center justify-center animate-fade-in-up">
-            <BookOpen size={32} className="text-ink/30" />
+          <div className="w-full h-40 lg:w-56 lg:h-56 lg:shrink-0 bg-pastel-peach rounded-card mb-4 overflow-hidden flex items-center justify-center animate-fade-in-up">
+            {book.cover && typeof book.cover === "object" && book.cover.url ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={book.cover.url} alt={book.cover.alt || book.title} className="w-full h-full object-cover" />
+            ) : (
+              <BookOpen size={32} className="text-ink/30" />
+            )}
           </div>
           <div className="animate-fade-in-up" style={{ animationDelay: "60ms" }}>
             <h1 className="font-display font-extrabold text-2xl lg:text-4xl">{book.title}</h1>
@@ -58,7 +63,7 @@ export default async function BookPage({ params }: { params: Promise<{ bookSlug:
             const accessible = releasedYet && (free || bookUnlocked);
 
             return (
-              <Link key={chapter.id} href={accessible ? `/stories/${book.slug}/${chapter.slug}` : `/stories/${book.slug}`} style={{ animationDelay: `${120 + i * 50}ms` }} className={`group bg-white rounded-card p-4 shadow-card flex items-center justify-between animate-fade-in-up transition-all duration-300 ease-smooth ${accessible ? "hover:-translate-y-0.5 hover:shadow-hover" : "opacity-60"}`}>
+              <Link key={chapter.id} href={`/stories/${book.slug}/${chapter.slug}`} style={{ animationDelay: `${120 + i * 50}ms` }} className={`group bg-white rounded-card p-4 shadow-card flex items-center justify-between animate-fade-in-up transition-all duration-300 ease-smooth ${accessible ? "hover:-translate-y-0.5 hover:shadow-hover" : "opacity-80"}`}>
                 <div>
                   <p className="font-semibold text-sm">
                     Chapter {chapter.orderInBook}: {chapter.title}
