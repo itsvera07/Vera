@@ -32,12 +32,14 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
         },
         limit: 6,
       }),
+
       payload.find({
         collection: "lessons",
         where: { title: { contains: query } },
         limit: 8,
         depth: 2, // populate lesson.module and module.topic so we can build the real URL
       }),
+
       payload.find({
         collection: "books",
         where: {
@@ -45,6 +47,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
         },
         limit: 6,
       }),
+
       payload.find({
         collection: "chats",
         where: { title: { contains: query } },
@@ -123,10 +126,10 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
               {books.map((book: any, i: number) => (
                 <ScrollReveal key={book.id} delay={i * 0.04}>
                   <TiltLink href={`/stories/${book.slug}`} className="transition-shadow duration-300">
-                    <div className="w-full aspect-[2/3] mb-2 overflow-hidden flex items-center justify-center">
+                    <div className="w-full h-48 mb-2 overflow-hidden flex items-center justify-center">
                       {book.cover && typeof book.cover === "object" && book.cover.url ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={book.cover.url} alt={book.cover.alt || book.title} className="w-full h-full object-cover shadow-card" />
+                        <img src={book.cover.url} alt={book.cover.alt || book.title} className="h-full w-auto max-w-full object-contain shadow-card" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center bg-pastel-peach">
                           <BookOpen size={18} className="text-ink/30" />
