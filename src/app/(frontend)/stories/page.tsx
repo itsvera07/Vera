@@ -6,10 +6,6 @@ import { SearchBar } from "@/components/SearchBar";
 import { TiltLink } from "@/components/motion/TiltLink";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 
-// Without this, Next.js treats this page as fully static since it
-// never checks who's logged in — meaning it would freeze at build time
-// and never show new content added in /admin. This makes it refresh
-// itself at most every 30 seconds instead.
 export const revalidate = 30;
 
 export default async function StoriesPage() {
@@ -30,22 +26,22 @@ export default async function StoriesPage() {
         <SearchBar placeholder="Search stories..." className="mb-6 lg:max-w-md" />
 
         {themes.docs.map((theme: any, i: number) => (
-          <section key={theme.id} className="mb-7">
+          <section key={theme.id} className="mb-8">
             <p className="font-display font-bold mb-3">{theme.title}</p>
-            <div className="flex gap-3 overflow-x-auto pb-1 lg:grid lg:grid-cols-5 lg:overflow-visible">
+            <div className="flex gap-4 overflow-x-auto pb-2 lg:grid lg:grid-cols-6 lg:overflow-visible">
               {booksByTheme[i].docs.map((book: any, j: number) => (
-                <ScrollReveal key={book.id} delay={j * 0.05} variant="tiltIn" className="min-w-[140px] lg:min-w-0 shrink-0">
-                  <TiltLink href={`/stories/${book.slug}`} className="bg-white rounded-card shadow-card p-3 transition-shadow duration-300 hover:shadow-lift">
-                    <div className="w-full h-32 bg-pastel-peach rounded-xl mb-2 overflow-hidden flex items-center justify-center">
+                <ScrollReveal key={book.id} delay={j * 0.05} variant="tiltIn" className="w-28 lg:w-auto shrink-0">
+                  <TiltLink href={`/stories/${book.slug}`} className="block">
+                    <div className="aspect-[2/3] w-full rounded-md overflow-hidden bg-pastel-peach shadow-[2px_3px_0_rgba(26,26,46,0.06),4px_8px_16px_rgba(26,26,46,0.16)] flex items-center justify-center">
                       {book.cover && typeof book.cover === "object" && book.cover.url ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={book.cover.url} alt={book.cover.alt || book.title} className="w-full h-full object-cover" />
+                        <img src={book.cover.url} alt={book.cover.alt || book.title} className="w-full h-full object-cover object-top" />
                       ) : (
-                        <BookOpen size={22} className="text-ink/30" />
+                        <BookOpen size={26} className="text-ink/30" />
                       )}
                     </div>
-                    <p className="text-sm font-semibold leading-snug">{book.title}</p>
-                    <p className="text-xs text-ink-muted mt-1">{book.releaseSchedule === "weekly" ? "New chapter weekly" : "All chapters available"}</p>
+                    <p className="text-sm font-semibold leading-snug mt-2 line-clamp-2">{book.title}</p>
+                    <p className="text-xs text-ink-muted mt-0.5">{book.releaseSchedule === "weekly" ? "New chapter weekly" : "All chapters available"}</p>
                   </TiltLink>
                 </ScrollReveal>
               ))}

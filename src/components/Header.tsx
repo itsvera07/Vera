@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Search, ArrowLeft, Pencil, ChevronRight } from "@/lib/icons";
+import { Search, ArrowLeft, ChevronRight } from "@/lib/icons";
 import { MobileMenuButton } from "./MobileMenuButton";
 
 export function Logo({ className = "text-2xl" }: { className?: string }) {
@@ -45,9 +45,7 @@ export function BreadcrumbHeader({ crumbs, backHref }: { crumbs: { label: string
           </span>
         ))}
       </nav>
-      <button aria-label="More" className="w-9 h-9 rounded-full bg-white shadow-card flex items-center justify-center transition-all duration-200 ease-smooth hover:shadow-hover">
-        <Pencil size={15} />
-      </button>
+      <button aria-label="More" className="w-9 h-9 rounded-full flex items-center justify-center invisible" />
     </header>
   );
 }
